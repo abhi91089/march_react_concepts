@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root')
+
+        class Register extends React.Component {
+            constructor() {
+                super() 
+                this.state = {
+                    username: '',
+                    email: '',
+                    password: ''
+                }
+            }
+
+            handleUsernameChange = (e) => {
+                const username = e.target.value 
+                this.setState({ username })
+            }
+
+            handleEmailChange = (e) => {
+                const email = e.target.value 
+                this.setState({ email })
+            }
+
+            handlePasswordChange = (e) => {
+                const password = e.target.value 
+                this.setState({ password })
+            }
+
+            handleSubmit = (e) => {
+                e.preventDefault() 
+                const formData = {
+                    username: this.state.username, 
+                    email: this.state.email, 
+                    password: this.state.password 
+                }
+                console.log(formData)
+            }
+
+            render(){ 
+                return (
+                    <div>
+                        <h2>Register with us</h2> 
+                        <form onSubmit={this.handleSubmit}>
+                            <label>username</label> 
+                            <input 
+                                type="text" 
+                                value={this.state.username}
+                                onChange={this.handleUsernameChange}
+                            /> <br/> 
+
+                            <label> email </label> 
+                            <input 
+                                type="text"
+                                value={this.state.email}
+                                onChange={this.handleEmailChange}
+                            /> <br/> 
+
+                            <label> password </label>
+                            <input
+                                type="password"
+                                value={this.state.password}
+                                onChange={this.handlePasswordChange}
+                            /> <br /> 
+
+                            <input type="submit" value="register" /> 
+                        </form>
+                    </div> 
+                )
+            }
+        }
+
+        ReactDOM.render(<Register />, rootHandle)
+    </script>
+
+
+</body>
+
+</html>

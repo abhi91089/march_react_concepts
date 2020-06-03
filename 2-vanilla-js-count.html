@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <h1 id="head1"> 0 </h1>
+    <button id="btn-up"> up </button> 
+    <button id="btn-down"> down </button>
+    <h3 id="head3"> 0 </h3> 
+
+    <script>
+        const head1Handle = document.getElementById('head1')
+        const head3Handle = document.getElementById('head3')
+        const btnUpHandle = document.getElementById('btn-up')
+        const btnDownHandle = document.getElementById('btn-down')
+
+        let count = 0
+
+        head1Handle.innerHTML = count 
+        head3Handle.innerHTML = count 
+
+        btnUpHandle.addEventListener('click', () => {
+            count += 1
+            
+            head1Handle.innerHTML = count
+            head3Handle.innerHTML = count 
+        })
+
+        btnDownHandle.addEventListener('click', () => {
+            count -= 1
+
+            head1Handle.innerHTML = count
+            head3Handle.innerHTML = count 
+        })
+
+    </script>
+</body>
+
+</html>

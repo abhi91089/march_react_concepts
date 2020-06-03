@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root')
+
+        class TasksList extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    tasks: [],
+                    id: '',
+                    title: '',
+                    status: false,
+                    completedDate: ''
+                }
+            }
+
+            handleRemove = (id) => {
+                const confirmRemove = confirm("Are you sure?")
+                if (confirmRemove) {
+                    this.setState((prevState) => {
+                        return {
+                            tasks: prevState.tasks.filter(task => task.id != id)
+                        }
+                    })
+                }
+            }
+
+            handleSubmit = (e) => {
+                e.preventDefault()
+                const formData = {
+                    id: parseInt(this.state.id),
+                    title: this.state.title, 
+                    status: this.state.status,
+                    completedDate: this.state.completedDate
+                }
+                
+                this.setState((prevState) => {
+                    return {
+                        tasks: prevState.tasks.concat(formData),
+                        id: '',
+                        title: '',
+                        status: false,
+                        completedDate: ''
+                    }
+                })
+            }
+
+            handleIdChange = (e) => {
+                const id = e.target.value 
+                this.setState({ id })
+            }
+
+            handleTitleChange = (e) => {
+                const title = e.target.value 
+                this.setState({ title })
+            }
+
+            handleStatusChange = (e) => {
+                const status = e.target.checked
+                this.setState({ status })
+            }
+
+            handleCompletedDateChange = (e) =>{
+                const completedDate = e.target.value 
+                this.setState({ completedDate })
+            }
+
+            handleShow = (task) => {
+                alert(`id - ${task.id}, title- ${task.title}, status - ${task.status}`)
+            }
+
+            render() {
+                console.log(this.state)
+                return (
+                    <div>
+                        <h1> Listing Tasks - {this.state.tasks.length} </h1>
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th> title </th>
+                                    <th> status </th>
+                                    <th> completed date </th> 
+                                    <th> action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.tasks.map((task, i) => {
+                                    return (
+                                        <tr key={task.id}>
+                                            <td> {task.id}</td>
+                                            <td> {task.title}</td>
+                                            <td> {task.status ? 'completed' : "ongoing"}</td>
+                                            <td> { task.status ? task.completedDate : '-'} </td> 
+                                            <td>
+                                                <button onClick={() => {
+                                                    this.handleShow(task)
+                                                }}> show </button>
+
+                                                <button onClick={() => {
+                                                    this.handleRemove(task.id)
+                                                }}>
+                                                    remove
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+
+                        <h2>Add Task</h2> 
+                        <form onSubmit={this.handleSubmit}>
+                            <label> id </label> 
+                            <input type="number" value={this.state.id} onChange={this.handleIdChange} /> <br/> 
+
+                            <label> title </label>
+                            <input type="text" value={this.state.title} onChange={this.handleTitleChange} /> <br />
+
+                            <label> status </label>
+                            <input type="checkbox" onChange={this.handleStatusChange} checked={this.state.status} /> <br /> 
+
+                            { this.state.status && (
+                                <div>
+                                    <label> completed date </label> 
+                                    <input type="date" value={this.state.completedDate} onChange={this.handleCompletedDateChange} />
+                                </div> 
+                            )}
+
+                            <input type="submit" value="add task" />
+
+                        </form>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<TasksList />, rootHandle)
+
+    </script>
+
+</body>
+
+</html>

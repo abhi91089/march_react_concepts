@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        // vanilla js - li - document.createElement('li')
+        // react - li - React.createElement('li', '', '')
+
+        /*
+            http methods
+            POST - Create (C)
+            GET - Read (R)
+            PUT - Update (U)
+            DELETE - Destroy (D)
+        */
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users')
+        xhr.send()
+
+        // async callback 
+        xhr.onload = function(){
+            // console.log(typeof xhr.responseText)
+            const users = JSON.parse(xhr.responseText)
+            console.log(users)
+        }
+
+        xhr.onerror = function(){
+            console.log(xhr.responseText)
+        }
+
+        /* 
+            JSON -> Object - JSON.parse(obj)
+            Object -> JSON - JSON.stringify(obj)
+        */
+    </script>
+</body>
+</html>

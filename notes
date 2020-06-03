@@ -1,0 +1,15 @@
+function component 
+    - resuable
+    - work in isolation
+
+name should be in capital
+1 input called as props
+return react elements 
+
+class component 
+    - retain data inside the component
+    - state which will be object 
+
+can we update state directly ? Yes, but we should not do it this way, because, state value changes but the compoennt doesnt re render 
+
+instead we use the setState method, to ensure we not only change the value of the state but it also re renders the component
